@@ -70,7 +70,7 @@ const TopMenu = () => {
               <Nav.Link as={Link} to="search" style={{color: "#ffffff", marginLeft: "10px"}}>
                 <FaSearch/>
               </Nav.Link>
-              <Nav.Link as={Link} to="/cart" style={{color: "#ffffff", marginLeft: "10px"}}>
+              <Nav.Link as={Link} to="cart" style={{color: "#ffffff", marginLeft: "10px"}}>
                 <FaShoppingCart size={20} />
                 <sup className="myitem">{proLength}</sup>
               </Nav.Link>

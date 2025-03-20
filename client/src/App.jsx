@@ -17,7 +17,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"
 import Contact from "./pages/Contact";
 import Search from "./pages/Search";
-import Cart from "./pages/cart";
+import Cart from "./pages/Cart";
+
 const App=()=>{
  
   return(
