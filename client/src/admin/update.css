@@ -1,0 +1,42 @@
+/* Make the table scrollable */
+.table-container {
+    max-width: 100%;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    padding: 15px;
+}
+
+/* Responsive table styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+thead {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+/* Make the table header sticky when scrolling */
+thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: #f1f1f1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    table, th, td {
+        font-size: 12px; /* Smaller text for mobile devices */
+    }
+
+    th, td {
+        padding: 8px; /* Reduced padding */
+    }
+}

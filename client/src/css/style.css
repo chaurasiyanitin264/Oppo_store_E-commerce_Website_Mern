@@ -1,0 +1,317 @@
+body {
+  font-family: 'Arial', sans-serif;
+}
+
+.navcolor{
+  background-color: #f8f9fa;
+  border: 1px solid white;
+}
+
+  
+
+  /* #E0E8EA; */
+
+  .newimg img {
+    width: 100%;
+    height: 400px; /* Set fixed height */
+    margin-left: 20px; /* Add left margin */
+    margin-right: 50px; /* Add right margin */
+}
+
+/* offers */
+/* Default styles for larger screens (Desktop) */
+.product-card {
+  width: 100%;
+  max-width: 400px;
+  margin: 20px;
+  box-sizing: border-box;
+}
+
+.offers {
+  display: flex;
+  flex-wrap: wrap;  /* Allow wrapping of items if needed */
+  justify-content: space-between; /* Space between items */
+}
+
+.offers div {
+  margin: 10px;
+  text-align: center;
+}
+
+/* Community Styling */
+.community {
+  margin-left: 30px;
+  font-size: 32px;
+}
+
+/* For Laptop View (screens between 1024px and 1366px) */
+@media (max-width: 1366px) and (min-width: 1024px) {
+  .product-card {
+    max-width: 80%; /* Reduce max-width for laptops */
+    margin: 20px auto;
+  }
+
+  .offers {
+    display: flex;
+    justify-content: space-between; /* Spread out offers */
+    margin: auto;
+  }
+
+  .offers div {
+    width: 30%;  /* 3 items per row */
+    margin: 10px;
+  }
+
+  .community {
+    font-size: 28px; /* Slightly smaller font size */
+    margin-left: 15px; /* Adjust left margin */
+    text-align: center;
+  }
+}
+
+/* For Tablet View (screens between 768px and 1024px) */
+@media (max-width: 1024px) and (min-width: 768px) {
+  .product-card {
+    max-width: 90%; /* Make card width more flexible */
+    margin: 15px auto;
+  }
+
+  .offers {
+    display: block; /* Stack items vertically */
+    margin: auto;
+  }
+
+  .offers div {
+    margin: 15px 0; /* Reduced margin for vertical stacking */
+    text-align: center;
+  }
+
+  .community {
+    font-size: 24px; /* Adjust for tablets */
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .offers1 {
+    padding: 10px; /* Padding for better spacing on tablets */
+  }
+}
+
+/* For Mobile View (screens 768px and below) */
+@media (max-width: 768px) {
+  .product-card {
+    max-width: 100%;  /* Take full width on mobile */
+    margin: 10px auto;
+  }
+
+  .offers {
+    display: block; /* Stack offers vertically */
+    margin: 10px 0;
+  }
+
+  .offers div {
+    margin: 10px 0; /* Adjust margin for mobile devices */
+    text-align: center;
+  }
+
+  .community {
+    font-size: 20px; /* Smaller font size for mobile */
+    margin-left: 0;
+    text-align: center;
+  }
+
+  /* Events and opportunities */
+  .events, .opporeno {
+    margin: auto;
+    padding: 10px; /* Padding for mobile devices */
+  }
+}
+
+
+
+
+/* HOME.jsx */
+.video{
+  border-radius: 50%;
+  margin-top: 200px;
+  padding-top: 20px;
+}
+
+
+
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Responsive */
+  justify-content: center;
+  gap: -20px;
+  padding: 20px;
+}
+@media (max-width: 1068px) {
+  .product-list  {
+    /* display: block; */
+   margin: auto;
+   width: auto;
+  }
+}
+@media (max-width: 768px) {
+  .product-list  {
+    display: block;
+    margin: auto;
+    align-items: center;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .product-list {
+      grid-template-columns: 1fr; /* 1 item per row on small screens */
+      gap: 10px;
+  }
+}
+
+
+
+
+/* Default styles for larger screens */
+.product-card {
+  width: 100%;
+  max-width: 400px;
+  margin: 20px;
+  box-sizing: border-box;
+}
+
+/* For Tablets or Smaller Screens (max-width: 768px) */
+@media (max-width: 768px) {
+  .product-card {
+    max-width: 100%;  /* Make card take up full width on smaller screens */
+    margin: 10px;
+  }
+}
+
+/* For Mobile Devices (max-width: 480px) */
+@media (max-width: 480px) {
+  .product-card {
+    max-width: 100%;
+    margin: 5px;
+  }
+
+  .product-image {
+    max-width: 100%; /* Make sure the image is responsive */
+  }
+}
+
+
+/* productDetails */
+/* Default styles for larger screens (Laptop/Tablets) */
+.product-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 50px;
+  width: 90%;
+  margin: auto;
+}
+
+
+
+.product-info {
+  width: 45%; /* Take up less space on the right side */
+  text-align: left;
+  padding-left: 20px;
+}
+
+.similar-products {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Similar Product Styling */
+.similar-product {
+  width: 150px;
+  /* height: 150px; */
+  border: 3px solid lightblue;
+  padding: 2px;
+  cursor: pointer;
+  text-align: center;
+}
+
+ img {
+  width: 100%;
+  height: 100%;
+}
+
+/* For Mobile View (max-width: 768px) */
+@media (max-width: 768px) {
+  .product-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .product-image {
+    width: 100%; /* Make image take full width on mobile */
+    height: auto;
+  }
+
+  .product-info {
+    width: 100%; /* Take full width for product info */
+    text-align: center;
+    padding-left: 0;
+  }
+
+  .similar-products {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two items per row */
+    gap: 10px;
+    margin-top: 20px;
+    padding: 20px;
+    
+  }
+
+  .similar-product {
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* For Tablet View (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .product-container {
+    /* flex-direction: column; */
+    align-items: center;
+    padding: 30px;
+  }
+
+  .product-image {
+    width: 80%; /* Slightly smaller for tablets */
+    height: auto;
+  }
+
+  .product-info {
+    text-align: center;
+    padding-left: 0;
+  }
+
+  .similar-products {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two items per row for tablets */
+    gap: 15px;
+  }
+}
+
+
+
+
+/* form */
+
+
+
+
+/* corousal */
+
+.caro{
+  height: 100%;
+  width: 100%;
+}
+
