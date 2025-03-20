@@ -47,7 +47,7 @@ const showCustomerOrder=async(req, res)=>{
 }
 
 const displayAllCustomer=async(req, res)=>{
-       const Customer= await CustomerModel.find();
+       const Customer= await CustomerorderModel.find();
        res.status(200).send(Customer);
 }
 
