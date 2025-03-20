@@ -6,7 +6,7 @@ import AdminDashBoard from "./admin/AdminDashBoard";
 import Insert from "./admin/Insert";
 import Update from "./admin/Update";
 import ProductDetails from "./pages/ProductDetails";
-import Cart from "./pages/cart";
+
 import CheckOut from "./pages/CheckOut";
 import UserLogin from "./auth/UserLogin";
 import UserRegistration from "./auth/UserRegistration";
@@ -17,6 +17,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"
 import Contact from "./pages/Contact";
 import Search from "./pages/Search";
+import Cart from "./pages/cart";
 const App=()=>{
  
   return(
