@@ -11,7 +11,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import AutoPlayVideo from './AutoPlayVideo';
 
 import { useContext } from "react";
-import { myLoginContext } from "../loginContext";
+import { myLoginContext } from "../LoginContext";
 
 
 
