@@ -11,7 +11,6 @@ const customerorderSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now }
 });
 
-// Ensure that the model is only defined once
-const CustomerOrder = mongoose.models.customerorder || mongoose.model("customerorder", customerorderSchema);
 
-module.exports = CustomerOrder;
+
+module.exports =  mongoose.model("customerorder", customerorderSchema);
