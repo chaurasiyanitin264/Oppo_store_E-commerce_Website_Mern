@@ -11,6 +11,7 @@ const customerorderSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now }
 });
 
+// यह चेक करेगा कि मॉडल पहले से डिफाइन है या नहीं
+const CustomerOrder = mongoose.models.customerorder || mongoose.model("customerorder", customerorderSchema);
 
-
-module.exports =  mongoose.model("customerorder", customerorderSchema);
+module.exports = CustomerOrder;
