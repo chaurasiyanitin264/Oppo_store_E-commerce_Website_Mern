@@ -9,6 +9,7 @@ import LoginContextProvider from './LoginContext.jsx';  // Correct import
 
 createRoot(document.getElementById('root')).render(
     <Provider store={store}>
+    
         <LoginContextProvider>  {/* Corrected */}
             <App />
         </LoginContextProvider>
