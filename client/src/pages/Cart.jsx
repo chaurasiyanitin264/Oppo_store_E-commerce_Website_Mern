@@ -8,7 +8,7 @@ import { FaMoneyCheck } from "react-icons/fa";
 import { qntyIncrease, qntyDecrease, productRemove } from "../redux/cartSlice";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import "../css/cart.css"; // We'll create this CSS file next
+import "../css/cart.css";
 
 const Cart = () => {
   const proData = useSelector(state => state.mycart.cart);
