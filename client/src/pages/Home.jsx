@@ -11,12 +11,13 @@ import Carousel from 'react-bootstrap/Carousel';
 import AutoPlayVideo from './AutoPlayVideo';
 
 import { useContext } from "react";
-import { myLoginContext } from "../LoginContext";
+
 
 
 
 import AOS from 'aos'; // Import AOS
 import 'aos/dist/aos.css'; // Import AOS CSS
+import { LoginContext } from '../LoginContext';
 
 const Home = () => {
   useEffect(() => {
@@ -51,7 +52,7 @@ const Home = () => {
     navigate(`/productdetails/${id}`);
   };
 
-  const { setIsLogedIn } = useContext(myLoginContext);
+  const { setIsLogedIn } = useContext(LoginContext);
   const getProfile = async () => {
     const token = localStorage.getItem("token");
     const response = await axios.get(`${WEB_URL}/user/profile`, {
