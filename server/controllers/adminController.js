@@ -1,5 +1,5 @@
 const ProductModels=require("../models/productModels")
-const CustomerorderModels=require("../models/customerOrderModel");
+const customerOrderModel=require("../models/customerOrderModel");
 const AdminModel=require("../models/adminModels")
 const jwt = require("jsonwebtoken");
 
@@ -42,12 +42,12 @@ const productMakeNormal=async(req, res)=>{
 }
 
 const showCustomerOrder=async(req, res)=>{
-    const Order= await CustomerorderModels.find();
+    const Order= await customerOrderModel.find();
     res.status(200).send(Order);
 }
 
 const displayAllCustomer=async(req, res)=>{
-       const Customer= await CustomerorderModels.find();
+       const Customer= await customerOrderModel.find();
        res.status(200).send(Customer);
 }
 
