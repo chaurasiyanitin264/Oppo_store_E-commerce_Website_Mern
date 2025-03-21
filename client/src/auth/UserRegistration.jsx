@@ -32,7 +32,7 @@ const UserRegistration = () => {
 
       navigate("/userlogin");
     } catch (error) {
-      toast.danger("registration Failled", { position: "bottom-right", autoClose: 3000 });
+      toast.error("registration Failled", { position: "bottom-right", autoClose: 3000 });
 
     }
   };

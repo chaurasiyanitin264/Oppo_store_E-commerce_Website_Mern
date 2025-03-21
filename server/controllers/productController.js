@@ -62,11 +62,11 @@ const productRatingSave=async(req, res)=>{
     
     const Search_Product = async (req, res) => {
         const { serchProduct } = req.body;
-        console.log("Search Query: ", serchProduct);  // Log the search query
+        console.log("Search Query: ", serchProduct);  
         const Data = await ProductModels.find({
           name: { $regex: serchProduct, $options: 'i' },
         });
-        console.log("Search Results: ", Data);  // Log the results from MongoDB
+        console.log("Search Results: ", Data);  
         res.send(Data);
       };
 
