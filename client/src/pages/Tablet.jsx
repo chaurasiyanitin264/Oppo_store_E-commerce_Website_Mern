@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import WEB_URL from "../config";
-import { Card } from "react-bootstrap"; // Assuming you're using React Bootstrap for Card
+import { Card } from "react-bootstrap"; 
 import { useDispatch } from "react-redux";
 import { addtoCart } from "../redux/cartSlice";
+import { useNavigate } from "react-router-dom";
 
 const Tablet = () => {
   const [data, setData] = useState([]);
   const dispatch = useDispatch();
-
-  // Load audio products from the API
+ const navigate=useNavigate();
   const loadData = async () => {
     try {
       const api = `${WEB_URL}/product/tablet?category=Tablets`;
       const response = await axios.get(api);
-      console.log(response.data);  // Debugging: Ensure the API response is correct
-      setData(response.data);      // Set data after response
+      console.log(response.data);  
+      setData(response.data);      
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -25,10 +25,8 @@ const Tablet = () => {
     loadData();
   }, []);
 
-  const showFullProduct = (productId) => {
-    // Handle showing the full product details when the image is clicked
-    console.log("Showing full details for product:", productId);
-    // You can add routing or modal display logic here if needed
+  const showFullProduct = (id) => {
+    navigate(`/productdetails/${id}`);
   };
 
   const ans = data.map((key) => {
@@ -40,9 +38,9 @@ const Tablet = () => {
           maxWidth: "400px",
           margin: "20px",
           boxSizing: "border-box",
-          borderRadius: "10px", // Rounded corners for a modern feel
-          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)", // Soft shadow effect
-          transition: "transform 0.3s ease, box-shadow 0.3s ease", // Smooth hover effect
+          borderRadius: "10px", 
+          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)", 
+          transition: "transform 0.3s ease, box-shadow 0.3s ease", 
         }}
         className="product-card"
       >
@@ -55,7 +53,7 @@ const Tablet = () => {
             style={{
               width: "100%",
               height: "auto",
-              borderRadius: "10px 10px 0 0", // Ensure image has rounded corners
+              borderRadius: "10px 10px 0 0", 
               cursor: "pointer",
               transition: "transform 0.3s ease",
             }}
@@ -74,13 +72,13 @@ const Tablet = () => {
           <button
             className="add-to-cart"
             style={{
-              backgroundColor: "#28a745", // Brighter green for a fresh look
+              backgroundColor: "#28a745", 
               color: "#fff",
               border: "none",
-              padding: "12px 18px", // Slightly larger padding
+              padding: "12px 18px", 
               borderRadius: "5px",
               cursor: "pointer",
-              fontSize: "14px", // Increased font size for better readability
+              fontSize: "14px", 
               fontWeight: "bold",
               transition: "background-color 0.3s, transform 0.3s",
             }}
@@ -102,8 +100,8 @@ const Tablet = () => {
                 })
               );
             }}
-            onMouseEnter={(e) => e.target.style.backgroundColor = "#218838"} // Darker green on hover
-            onMouseLeave={(e) => e.target.style.backgroundColor = "#28a745"} // Reset to original green
+            onMouseEnter={(e) => e.target.style.backgroundColor = "#218838"} 
+            onMouseLeave={(e) => e.target.style.backgroundColor = "#28a745"} 
           >
             Buy Now
           </button>

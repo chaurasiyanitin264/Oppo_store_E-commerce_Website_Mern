@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {message} from "antd";
+import { toast } from "react-toastify";
 
 const cartSlice= createSlice({
     name:"mycart",
@@ -13,12 +13,18 @@ const cartSlice= createSlice({
             console.log(proData);
             if (proData.length>=1)
             {
-               alert("Product aleready added!");
+             
+                toast.error("Product already added!", {
+                    position: "bottom-right",
+                    autoClose: 3000,
+                  });
             }
             else
             {
             state.cart.push(actions.payload);
-            alert("Product succesfully added!");
+           
+            toast.success("Product succesfully added!", { position: "bottom-right", autoClose: 3000 });
+
             }           
         },
 
@@ -38,7 +44,9 @@ const cartSlice= createSlice({
                 {
                     if (state.cart[i].qnty<=1)
                     {
-                        alert("You can not decrease more than 1 ")
+                       
+                        toast.danger("You can not decrease more than 1 ", { position: "bottom-right", autoClose: 3000 });
+
                     }
                     else 
                     {

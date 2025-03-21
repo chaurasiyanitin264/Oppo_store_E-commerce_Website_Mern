@@ -5,12 +5,12 @@ import './css/style.css';
 import './admin/admin.css';
 import store from './redux/store.jsx';
 import { Provider } from 'react-redux';
-import LoginContextProvider from './LoginContext.jsx';  // Correct import
+import LoginContextProvider from './LoginContext.jsx';  
 
 createRoot(document.getElementById('root')).render(
     <Provider store={store}>
     
-        <LoginContextProvider>  {/* Corrected */}
+        <LoginContextProvider>  
             <App />
         </LoginContextProvider>
     </Provider>

@@ -1,4 +1,4 @@
-/* General Footer Styling */
+
 .footer {
     background-color: #212121;
     color: white;
@@ -20,7 +20,7 @@
     min-width: 250px;
   }
   
-  /* Footer Logo and Description */
+
   .footer-logo {
     font-size: 30px;
     font-weight: bold;
@@ -33,7 +33,7 @@
     color: #ccc;
   }
   
-  /* Quick Links */
+  
   .footer-section h4 {
     font-size: 18px;
     font-weight: bold;
@@ -59,7 +59,7 @@
     color: #4caf50;
   }
   
-  /* Social Media Icons */
+
   .footer-social-icons {
     margin-top: 15px;
   }
@@ -74,8 +74,7 @@
   .social-icon:hover {
     color: #4caf50;
   }
-  
-  /* Footer Bottom */
+
   .footer-bottom {
     background-color: #1a1a1a;
     text-align: center;
@@ -88,7 +87,7 @@
     color: #ccc;
   }
   
-  /* Responsive Design */
+ 
   @media (max-width: 768px) {
     .footer-container {
       flex-direction: column;

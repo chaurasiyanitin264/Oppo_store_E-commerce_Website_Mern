@@ -20,7 +20,7 @@ const Cart = () => {
   
   useEffect(() => {
     setIsCartEmpty(proData.length === 0);
-    // Add animation class to newly added items
+    
     const timer = setTimeout(() => {
       const items = document.querySelectorAll('.cart-item');
       items.forEach(item => {
@@ -38,7 +38,7 @@ const Cart = () => {
       dispatch(qntyDecrease({id}));
     }
     
-    // Add pulse animation to price
+    
     const priceElement = document.getElementById(`total-price-${id}`);
     if (priceElement) {
       priceElement.classList.add('price-update');

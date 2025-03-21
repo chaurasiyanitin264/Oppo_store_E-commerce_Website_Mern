@@ -40,7 +40,7 @@ const Insert = () => {
 
     const handleSubmit = async () => {
         const formData = new FormData();
-        // Add form fields
+        
         for (let key in input) {
             formData.append(key, input[key]);
         }

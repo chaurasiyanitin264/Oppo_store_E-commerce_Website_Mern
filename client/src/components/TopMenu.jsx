@@ -14,13 +14,13 @@ const TopMenu = () => {
 
   const navigate = useNavigate();
 
-  const [showDropdown, setShowDropdown] = useState(false); // Manage dropdown visibility
-  const [isLogedIn, setIsLogedIn] = useState(!!localStorage.getItem("username")); // Directly check localStorage
-  const [isLoggedOut, setIsLoggedOut] = useState(true); // Track logout state
+  const [showDropdown, setShowDropdown] = useState(false); 
+  const [isLogedIn, setIsLogedIn] = useState(!!localStorage.getItem("username")); 
+  const [isLoggedOut, setIsLoggedOut] = useState(true); 
 
-  // Listen for changes in login status
+ 
   useEffect(() => {
-    setIsLogedIn(!!localStorage.getItem("username")); // Update state based on localStorage value
+    setIsLogedIn(!!localStorage.getItem("username")); 
   }, [isLoggedOut]);
 
   const logout = () => {

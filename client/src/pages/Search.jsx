@@ -3,46 +3,46 @@ import Button from 'react-bootstrap/Button';
 import WEB_URL from "../config";
 import axios from "axios";
 import Card from "react-bootstrap/Card";
-import { Spinner } from 'react-bootstrap'; // For loading indicator
+import { Spinner } from 'react-bootstrap'; 
 
 const Search = () => {
   const [serchProduct, setSerchProduct] = useState("");
   const [mydata, setmydata] = useState([]);
-  const [loading, setLoading] = useState(false); // Track loading state
+  const [loading, setLoading] = useState(false); 
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
 
-  // Debouncing the search input
+ 
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedSearchTerm(serchProduct);
-    }, 500); // Delay 500ms after the user stops typing
+    }, 500); 
 
-    return () => clearTimeout(timer); // Cleanup the timer
+    return () => clearTimeout(timer); 
   }, [serchProduct]);
 
-  // Fetch data when debounced search term changes
+  
   useEffect(() => {
     const fetchData = async () => {
       if (!debouncedSearchTerm.trim()) {
-        setmydata([]); // Clear data when input is empty
+        setmydata([]); 
         return;
       }
 
-      setLoading(true); // Start loading
+      setLoading(true); 
       let api = `${WEB_URL}/product/search_Product`;
       try {
         const response = await axios.post(api, { serchProduct: debouncedSearchTerm });
         console.log(response.data);
         setmydata(response.data);
-        setLoading(false); // Stop loading when data is fetched
+        setLoading(false); 
       } catch (error) {
         console.error(error);
-        setLoading(false); // Stop loading in case of error
+        setLoading(false); 
       }
     };
 
     fetchData();
-  }, [debouncedSearchTerm]); // This effect runs every time 'debouncedSearchTerm' changes
+  }, [debouncedSearchTerm]); 
 
   const ans = mydata.map((key) => (
     <div key={key._id} data-aos="fade-up" style={{ display: "flex", justifyContent: "center", margin: "20px" }}>
@@ -52,7 +52,7 @@ const Search = () => {
           maxWidth: "350px",
           margin: "20px",
           boxSizing: "border-box",
-          borderRadius: "15px", // Rounded corners
+          borderRadius: "15px", 
           boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
           transition: "transform 0.3s ease, box-shadow 0.3s ease",
         }}

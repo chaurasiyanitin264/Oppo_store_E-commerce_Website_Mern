@@ -1,5 +1,4 @@
-/* cart */
-/* cart.css */
+
 .cart-container {
     padding: 20px;
     background-color: #f9f9f9;
@@ -249,7 +248,7 @@
     text-align: center;
   }
   
-  /* Animations */
+
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -302,7 +301,7 @@
     animation: pulse 0.5s;
   }
   
-  /* Custom scrollbar */
+ 
   .table-container::-webkit-scrollbar {
     width: 8px;
   }
@@ -321,7 +320,7 @@
     background: linear-gradient(180deg, #395cd6, #5d7dfb);
   }
   
-  /* Responsive adjustments */
+  
   @media (max-width: 992px) {
     .cart-header {
       flex-direction: column;

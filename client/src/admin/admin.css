@@ -106,7 +106,7 @@ header {
   background: var(--danger-gradient) !important;
   border: none !important;
   padding: 8px 15px !important;
-  border-radius: 50px !important; /* Rounded button */
+  border-radius: 50px !important; 
   font-weight: 500 !important;
   transition: var(--transition) !important;
   box-shadow: 0 3px 8px rgba(239, 68, 68, 0.4) !important;
@@ -228,31 +228,31 @@ header {
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.08);
 }
 
-/* Card with primary gradient background */
+
 .dashboard-card-primary {
   background: var(--primary-gradient);
   color: var(--text-light);
 }
 
-/* Card with secondary gradient background */
+
 .dashboard-card-secondary {
   background: var(--secondary-gradient);
   color: var(--text-light);
 }
 
-/* Card with success gradient background */
+
 .dashboard-card-success {
   background: var(--success-gradient);
   color: var(--text-light);
 }
 
-/* Card with danger gradient background */
+
 .dashboard-card-danger {
   background: var(--danger-gradient);
   color: var(--text-light);
 }
 
-/* Custom scrollbar */
+
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -270,7 +270,7 @@ header {
   background: linear-gradient(180deg, #8b5cf6 0%, #6366f1 100%);
 }
 
-/* Glassmorphism effect for special cards */
+
 .glass-card {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
@@ -280,7 +280,7 @@ header {
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Button styles */
+
 .btn-gradient-primary {
   background: var(--primary-gradient) !important;
   border: none !important;
@@ -297,7 +297,7 @@ header {
   box-shadow: 0 6px 8px rgba(99, 102, 241, 0.5) !important;
 }
 
-/* Badge styles */
+
 .badge-gradient {
   background: var(--primary-gradient);
   color: white;

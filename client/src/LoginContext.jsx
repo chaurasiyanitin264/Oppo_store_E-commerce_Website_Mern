@@ -1,9 +1,9 @@
 import { createContext, useState } from "react";
 
-// Create the context
+
 const LoginContext = createContext();
 
-// Context provider component
+
 const LoginContextProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -14,5 +14,5 @@ const LoginContextProvider = ({ children }) => {
     );
 };
 
-export default LoginContextProvider;  // Default export
-export { LoginContext };  // Named export
+export default LoginContextProvider;  
+export { LoginContext };  

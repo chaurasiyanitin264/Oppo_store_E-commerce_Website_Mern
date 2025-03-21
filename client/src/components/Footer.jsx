@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <footer class="footer" style={{padding:"30px"}}>
     <div class="footer-container">
-      {/* <!-- Company Info Section --> */}
+     
       <div class="footer-section">
         <h3 class="footer-logo">Oppo Store</h3>
         <p class="footer-description">
@@ -26,7 +26,7 @@ const Footer = () => {
         </div>
       </div>
   
-      {/* <!-- Quick Links Section --> */}
+      
       <div class="footer-section">
         <h4>Quick Links</h4>
         <ul>
@@ -37,7 +37,7 @@ const Footer = () => {
         </ul>
       </div>
   
-      {/* <!-- Contact Section --> */}
+      
       <div class="footer-section">
         <h4>Contact Us</h4>
         <ul>
@@ -48,7 +48,7 @@ const Footer = () => {
       </div>
     </div>
   
-    {/* <!-- Footer Bottom --> */}
+    
     <div class="footer-bottom">
       <p>&copy; 2025 Oppo Store. All Rights Reserved.</p>
     </div>

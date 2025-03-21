@@ -8,13 +8,16 @@ import { useNavigate } from "react-router-dom";
 import { Button, Modal } from 'antd';
 import { message } from "antd";
 import "../css/productdetails.css"
+import { useDispatch } from "react-redux";
+import { addtoCart } from "../redux/cartSlice"
+import { toast } from "react-toastify";
 const ProductDetails = () => {
   const { id } = useParams();
   const [myPro, setMyPro] = useState({});
   const [similarPro, setSimilarPro] = useState([]);
   const [largeImg, setLargeImg] = useState(myPro.defaultImage);
   const navigate = useNavigate();
-
+  const dispatch=useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [proRating, setProRating] = useState(0);
 
@@ -29,14 +32,14 @@ const ProductDetails = () => {
         ratings: proRating,
         name: localStorage.getItem("username"),
         userid: localStorage.getItem("userid"),
-       
       });
-      message.success("Rating")
-      // alert("okk")
-      console.log(response.data);
+  
+      console.log("Toast should appear now!");
+      toast.success("Ratings successfully", { position: "bottom-right", autoClose: 3000 });
       setIsModalOpen(false);
     } catch (error) {
-      message.error(error.response.data.msg);
+      toast.error("Please User Login!", { position: "bottom-right", autoClose: 3000 });
+      // navigate("/userlogin");
     }
   };
 
@@ -79,31 +82,31 @@ const ProductDetails = () => {
   const ans = similarPro.map((key1) => {
     return (
       <div key={key1._id} className="similar-product" style={{ margin: "20px" }}>
-      <img
-        src={`${WEB_URL}/${key1.defaultImage}`}
-        onClick={() => {
-          showFullProduct(key1._id);
-        }}
-        alt="Product"
-        className="product-image"
-      />
-      <div className="product-details">
-        <p className="product-name">Product : {key1.name}</p>
-        <p className="product-price">
-          <b>
-            Price : <PiCurrencyInrThin /> {key1.price}
-          </b>
-        </p>
+        <img
+          src={`${WEB_URL}/${key1.defaultImage}`}
+          onClick={() => {
+            showFullProduct(key1._id);
+          }}
+          alt="Product"
+          className="product-image"
+        />
+        <div className="product-details">
+          <p className="product-name">Product : {key1.name}</p>
+          <p className="product-price">
+            <b>
+              Price : <PiCurrencyInrThin /> {key1.price}
+            </b>
+          </p>
+        </div>
       </div>
-    </div>
-    
+
     );
   });
 
   return (
     <>
       {/* <h1> Show Product Detail </h1> */}
-      <div className="product-container" style={{backgroundColor:"#E0E8EA",marginTop:"90px"}}>
+      <div className="product-container" style={{ backgroundColor: "#E0E8EA", marginTop: "90px" }}>
         <div>
           {myPro.images &&
             myPro.images.map((key) => (
@@ -128,43 +131,74 @@ const ProductDetails = () => {
           />
         </div>
 
-        <div className="product-info" style={{backgroundColor:"white", margin:"10px", padding:"20px", borderRadius:"8px", boxShadow:"0 2px 8px rgba(0,0,0,0.1)"}}>
-          <h2 style={{fontSize:"24px", fontWeight:"600", marginBottom:"12px", color:"#333"}}>{myPro.name}</h2>
-          
-          <h3 style={{display:"flex", alignItems:"center", fontSize:"22px", color:"#2563eb", marginBottom:"16px"}}>
-            <PiCurrencyInrThin style={{fontSize:"26px", marginRight:"4px"}} /> {myPro.price}
+        <div className="product-info" style={{ backgroundColor: "white", margin: "10px", padding: "20px", borderRadius: "8px", boxShadow: "0 2px 8px rgba(0,0,0,0.1)" }}>
+          <h2 style={{ fontSize: "24px", fontWeight: "600", marginBottom: "12px", color: "#333" }}>{myPro.name}</h2>
+
+          <h3 style={{ display: "flex", alignItems: "center", fontSize: "22px", color: "#2563eb", marginBottom: "16px" }}>
+            <PiCurrencyInrThin style={{ fontSize: "26px", marginRight: "4px" }} /> {myPro.price}
           </h3>
-          
-          <div style={{backgroundColor:"#f9fafb", padding:"12px", borderRadius:"6px", marginBottom:"16px"}}>
-            <h5 style={{fontSize:"16px", lineHeight:"1.5", color:"#4b5563", margin:"0"}}>
-              <span style={{fontWeight:"600", color:"#374151"}}>Description: </span>
+
+          <div style={{ backgroundColor: "#f9fafb", padding: "12px", borderRadius: "6px", marginBottom: "16px" }}>
+            <h5 style={{ fontSize: "16px", lineHeight: "1.5", color: "#4b5563", margin: "0" }}>
+              <span style={{ fontWeight: "600", color: "#374151" }}>Description: </span>
               {myPro.description}
             </h5>
           </div>
-          
-          <div style={{display:"flex", alignItems:"center", marginBottom:"16px"}}>
-            <span style={{fontStyle:"italic", marginRight:"8px", color:"#4b5563"}}>Ratings: </span>
-            <div style={{display:"flex", alignItems:"center", marginRight:"12px"}}>
+
+          <div style={{ display: "flex", alignItems: "center", marginBottom: "16px" }}>
+            <span style={{ fontStyle: "italic", marginRight: "8px", color: "#4b5563" }}>Ratings: </span>
+            <div style={{ display: "flex", alignItems: "center", marginRight: "12px" }}>
               {[...Array(myPro.ratings)].map((_, index) => (
-                <FaStar key={index} style={{color:"#f59e0b", marginRight:"2px"}} />
+                <FaStar key={index} style={{ color: "#f59e0b", marginRight: "2px" }} />
               ))}
             </div>
-            <Button 
-              onClick={showModal} 
-              style={{marginLeft:"8px", fontSize:"14px"}}
+            <Button
+              onClick={showModal}
+              style={{ marginLeft: "8px", fontSize: "14px" }}
             >
               Give your Rate
             </Button>
           </div>
-          
-          <hr style={{border:"none", height:"1px", backgroundColor:"#e5e7eb", margin:"16px 0"}} />
-          
-          <Button 
-            type="primary" 
-            style={{backgroundColor:"#22c55e", borderColor:"#22c55e", height:"40px", fontSize:"16px", padding:"0 24px"}}
+
+          <hr style={{ border: "none", height: "1px", backgroundColor: "#e5e7eb", margin: "16px 0" }} />
+
+          <button
+            className="add-to-cart"
+            style={{
+              backgroundColor: "#28a745",
+              color: "#fff",
+              border: "none",
+              padding: "12px 18px",
+              borderRadius: "5px",
+              cursor: "pointer",
+              fontSize: "14px",
+              fontWeight: "bold",
+              transition: "background-color 0.3s, transform 0.3s",
+            }}
+            onClick={() => {
+              dispatch(
+                addtoCart({
+                  id: myPro._id,
+                  name: myPro.name,
+                  brand: myPro.brand,
+                  price: myPro.price,
+                  description: myPro.description,
+                  category: myPro.category,
+                  subcategory: myPro.subcategory,
+                  images: myPro.images,
+                  defaultImage: myPro.defaultImage,
+                  ratings: myPro.ratings,
+                  status: myPro.status,
+                  qnty: 1,
+                })
+              );
+            }}
+            onMouseEnter={(e) => e.target.style.backgroundColor = "#218838"}
+            onMouseLeave={(e) => e.target.style.backgroundColor = "#28a745"}
           >
-            Add to Cart
-          </Button>
+            Buy Now
+          </button>
+
         </div>
       </div>
 

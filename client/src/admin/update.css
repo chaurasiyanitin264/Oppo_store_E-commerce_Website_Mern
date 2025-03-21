@@ -1,11 +1,11 @@
-/* Make the table scrollable */
+
 .table-container {
     max-width: 100%;
-    overflow-x: auto; /* Enable horizontal scrolling */
+    overflow-x: auto; 
     padding: 15px;
 }
 
-/* Responsive table styles */
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -22,7 +22,7 @@ thead {
     font-weight: bold;
 }
 
-/* Make the table header sticky when scrolling */
+
 thead th {
     position: sticky;
     top: 0;
@@ -30,13 +30,13 @@ thead th {
     background-color: #f1f1f1;
 }
 
-/* Responsive adjustments */
+
 @media (max-width: 768px) {
     table, th, td {
-        font-size: 12px; /* Smaller text for mobile devices */
+        font-size: 12px; 
     }
 
     th, td {
-        padding: 8px; /* Reduced padding */
+        padding: 8px; 
     }
 }

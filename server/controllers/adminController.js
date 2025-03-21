@@ -1,6 +1,7 @@
 const ProductModels=require("../models/productModels")
 const customerOrderModel=require("../models/customerOrderModel");
-const AdminModel=require("../models/adminModels")
+const AdminModel=require("../models/adminModels");
+const helpModels=require("../models/HelpSupportModels")
 const jwt = require("jsonwebtoken");
 
 const productSave=async(req, res)=>{  
@@ -59,22 +60,21 @@ const AdminLogin = async (req, res) => {
     //  res.send("OKK")
     const { adminid, password } = req.body;
     try {
-      // Admin को डेटाबेस से ढूंढो
+     
       const Admin = await AdminModel.findOne({ adminid: adminid });
   
       if (!Admin) {
         return res.status(400).json({ msg: "Invalid user Id" });
       }
   
-      // यहाँ bcrypt का उपयोग किया जाएगा, जो कि पासवर्ड को सिक्योर तरीके से चेक करेगा
-      // bcrypt.compare(password, Admin.password) का इस्तेमाल करें
-      const isPasswordMatch = Admin.password === password; // यहाँ पासवर्ड को सिक्योर चेक करना चाहिए।
+      
+      const isPasswordMatch = Admin.password === password; 
   
       if (!isPasswordMatch) {
         return res.status(400).json({ msg: "Invalid password" });
       }
   
-      // यदि पासवर्ड सही है, तो JWT टोकन जनरेट करें और भेजें
+      
       const token = jwt.sign({ id: Admin._id }, process.env.TOKEN_KEY, {
         expiresIn: "3d",
       });
@@ -84,30 +84,7 @@ const AdminLogin = async (req, res) => {
       res.status(500).json({ msg: "Server error" });
     }
   };
-  // const Login = async (req, res) => {
-  //   try {
-  //     const { email, password } = req.body;
-  // const UserLogin = await UserModel.findOne({ useremail: email });
-  //     if (!UserLogin) {
-  //       return res.status(400).json({ msg: "Invalid Email" });
-  //     }
-  //     // Compare password
-  //     const isMatch = await bcrypt.compare(password, UserLogin.password);
-  //     if (!isMatch) {
-  //       return res.status(400).json({ msg: "Invalid Password" });
-  //     }
-  //     // Generate token
-  //     const token = jwt.sign({ id: UserLogin._id }, process.env.TOKEN_KEY, {
-  //       expiresIn: "3d", 
-  //     });
-  //   //  console.log(token)
-  //     return res.status(200).json({token:token});
-  //   } catch (error) {
-  //     console.error("Login Error:", error);
-  //     return res.status(500).json({ msg: "Internal Server Error" });
-  //   }
-  // };
-  
+ 
   const adminauth=async(req,res)=>{
     const token = req.header("auth-token");
     // console.log(token)
@@ -119,12 +96,12 @@ const AdminLogin = async (req, res) => {
 
 
 
-// const productMakeNormal=async(req, res)=>{
-//     const {id} = req.body;
-//     const Data= await ProductModel.findByIdAndUpdate(id, {status:"normal"} );
-//     res.status(201).send({msg:"Product Status Succesfully Changed!"});
-// }
 
+
+const helpsupport=async(req,res)=>{
+    console.log(req.body);
+    res.send("okk")
+}
 
 module.exports ={
     productSave,
@@ -135,5 +112,6 @@ module.exports ={
     displayAllCustomer,
     AdminLogin,
     adminauth,
+    helpsupport
   
 }

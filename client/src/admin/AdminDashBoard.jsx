@@ -13,7 +13,7 @@ const AdminDashBoard = () => {
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(window.innerWidth > 768);
   
-  // Handle window resize
+
   useEffect(() => {
     const handleResize = () => {
       setIsMenuOpen(window.innerWidth > 768);
@@ -27,23 +27,23 @@ const AdminDashBoard = () => {
     setIsMenuOpen(!isMenuOpen);
   };
   
-  // Correct way to retrieve data from localStorage
+ 
   const AdminName = localStorage.getItem("adminname");
   
   const logout = () => {
-    // Clear localStorage when the user logs out
+    
     localStorage.clear();
     navigate("/home");
   };
   
-  // Check if a link is active
+
   const isActive = (path) => {
     return location.pathname.includes(path);
   };
   
-  // Sample dashboard content to demonstrate the design
+  
   const SampleDashboardContent = () => {
-    // This is just placeholder content to show the styling capabilities
+    
     if (!location.pathname.includes('createuser') && 
         !location.pathname.includes('insert') && 
         !location.pathname.includes('usertaskreport') && 
@@ -131,7 +131,7 @@ const AdminDashBoard = () => {
             </nav>
           </aside>
           
-          {/* Content Area */}
+          
           <div id="content">
             <SampleDashboardContent />
             <Outlet />

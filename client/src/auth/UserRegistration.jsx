@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import WEB_URL from "../config";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import "./register.css"
 const UserRegistration = () => {
   const [input, setInput] = useState({});
@@ -27,10 +28,12 @@ const UserRegistration = () => {
 
     try {
       const response = await axios.post(api, input);
-      console.log(response);
+      toast.success("registration Successful!", { position: "bottom-right", autoClose: 3000 });
+
       navigate("/userlogin");
     } catch (error) {
-      console.log(error);
+      toast.danger("registration Failled", { position: "bottom-right", autoClose: 3000 });
+
     }
   };
 

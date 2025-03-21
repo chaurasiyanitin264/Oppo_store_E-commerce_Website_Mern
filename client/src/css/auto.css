@@ -1,37 +1,37 @@
-/* Base styles for the video container */
+
 .video-container {
-    margin-top: 20px;  /* Default margin-top */
+    margin-top: 20px;  
     border-radius: 5%;
     overflow: hidden;
   }
   
-  /* Media Query for Mobile (max-width: 480px) */
+  
   @media (max-width: 480px) {
     .video-container {
-      margin-top: 300px; /* Override margin-top for mobile */
+      margin-top: 300px; 
     }
   }
   
-  /* Tablet view (max-width: 768px) */
+  
   @media (max-width: 768px) {
     .video-container {
-      width: 90%;  /* Reduce size on tablets */
-      margin: 0 auto; /* Center align the video */
+      width: 90%;  
+      margin: 0 auto; 
     }
   }
   
-  /* Laptop view (max-width: 1024px) */
+ 
   @media (max-width: 1024px) {
     .video-container {
-      width: 80%; /* Adjust the width for laptops */
-      margin: 0 auto; /* Center align the video */
+      width: 80%; 
+      margin: 0 auto; 
     }
   }
   
-  /* Make the video responsive */
+  
   video {
-    width: 100%;    /* Make sure the video takes the full width */
-    height: auto;   /* Maintain the aspect ratio */
-    border-radius: 1%; /* Apply border-radius to the video itself */
+    width: 100%;   
+    height: auto;   
+    border-radius: 1%; 
   }
   

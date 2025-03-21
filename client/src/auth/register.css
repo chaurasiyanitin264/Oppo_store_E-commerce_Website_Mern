@@ -1,4 +1,4 @@
-/* Style for the container */
+
 .signup-container {
     display: flex;
     justify-content: center;
@@ -7,7 +7,7 @@
     background-color: #f4f4f4;
   }
   
-  /* Style for the signup box */
+
   .signup-box {
     width: 100%;
     max-width: 400px;
@@ -15,7 +15,7 @@
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 130px; /* Set margin-top to 150px */
+    margin-top: 130px; 
     margin-bottom: 50px;
   }
   
@@ -26,18 +26,18 @@
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 60px; /* Set margin-top to 150px */
+    margin-top: 60px; 
     margin-bottom: 50px;
   }
   
-  /* Title style */
+  
   .signup-title {
     font-size: 24px;
     text-align: center;
     margin-bottom: 20px;
   }
   
-  /* Form style */
+
   .signup-form {
     display: flex;
     flex-direction: column;
@@ -51,7 +51,7 @@
     font-size: 16px;
   }
   
-  /* Button style */
+
   .signup-button {
     padding: 12px;
     background-color: #4caf50;
@@ -66,7 +66,7 @@
     background-color: #45a049;
   }
   
-  /* Text below the form */
+  
   .signup-text {
     text-align: center;
     font-size: 14px;
@@ -82,23 +82,23 @@
     text-decoration: underline;
   }
   
-  /* Responsive styles */
+
   @media (max-width: 600px) {
     .signup-box {
-      /* margin-top: 5px; Reduce margin on smaller screens */
-      width: 90%; /* Make form take up more space */
+      /* margin-top: 5px; */
+      width: 90%; 
     }
   
     .signup-input {
-      font-size: 14px; /* Slightly smaller text input */
+      font-size: 14px; 
     }
   
     .signup-button {
-      font-size: 14px; /* Slightly smaller button */
+      font-size: 14px; 
     }
   
     .signup-title {
-      font-size: 20px; /* Smaller title for small screens */
+      font-size: 20px; 
     }
   }
   

@@ -17,7 +17,7 @@ const UserLogin = () => {
     }
   }, [navigate]);
 
-  // Admin authentication after successful login
+ 
   const UserAuth = async (token) => {
     if (token) {
       try {
@@ -25,23 +25,23 @@ const UserLogin = () => {
         const tokenres = await axios.post(api, null, { headers: { "auth-token": token } });
         localStorage.setItem("adminname", tokenres.data.adminname);
         localStorage.setItem("email", tokenres.data.email);
-        navigate("/admin"); // Navigate to admin path
+        navigate("/admin"); 
       } catch (error) {
         toast.error("Admin authentication failed", { position: "bottom-right", autoClose: 3000 });
       }
     }
   };
 
-  // Handle form submission
+  
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault(); 
     let api;
 
     try {
       if (userRole === "user") {
-        api = `${WEB_URL}/user/userlogin`; // User login API
+        api = `${WEB_URL}/user/userlogin`; 
       } else if (userRole === "admin") {
-        api = `${WEB_URL}/admin/adminlogin`; // Admin login API
+        api = `${WEB_URL}/admin/adminlogin`; 
       } else {
         toast.error("Please select a role", { position: "bottom-right", autoClose: 3000 });
         return;
@@ -50,13 +50,13 @@ const UserLogin = () => {
       const response = await axios.post(api, { email, password });
       toast.success("Login Successful!", { position: "bottom-right", autoClose: 3000 });
 
-      // Store token in localStorage
+      
       localStorage.setItem("token", response.data.token);
 
       if (userRole === "user") {
         navigate("/home");
       } else if (userRole === "admin") {
-        UserAuth(response.data.token); // Call UserAuth for admin
+        UserAuth(response.data.token); 
       }
     } catch (error) {
       toast.error(error.response ? error.response.data.msg : "Login failed", { position: "bottom-right", autoClose: 3000 });

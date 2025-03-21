@@ -7,16 +7,16 @@ import Nav from 'react-bootstrap/Nav';
 
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Dropdown } from 'react-bootstrap';  // Import Dropdown
+import { Dropdown } from 'react-bootstrap';  
 import { useEffect } from "react";
 const Header = () => {
   const ProductData = useSelector(state => state.mycart.cart);
   const proLength = ProductData.length;
   const navigate = useNavigate();
   
-  const [showDropdown, setShowDropdown] = useState(false); // Manage dropdown visibility
+  const [showDropdown, setShowDropdown] = useState(false); 
   const [isLogedIn, setIsLogedIn] = useState(!!localStorage.getItem("username"));
-  const [isLoggedOut, setIsLoggedOut] = useState(true); // Track logout state
+  const [isLoggedOut, setIsLoggedOut] = useState(true); 
 
 useEffect(() => {
   setIsLogedIn(!!localStorage.getItem("username"));
@@ -32,9 +32,9 @@ useEffect(() => {
 
   const logout = () => {
     localStorage.removeItem("username");
-    setIsLoggedOut(false); // Trigger a state change
-    setShowDropdown(false); // Close dropdown
-    navigate("/"); // Navigate to homepage or login page
+    setIsLoggedOut(false); 
+    setShowDropdown(false); 
+    navigate("/"); 
   };
 
   return (
