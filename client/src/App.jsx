@@ -15,7 +15,7 @@ import Tablet from "./pages/Tablet";
 import Audio from "./pages/Audio";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"
-import Contact from "./pages/Contact";
+// import Contact from "./pages/Contact";
 import Search from "./pages/Search";
 import Cart from "./pages/CartProduct";
 
@@ -36,7 +36,7 @@ const App=()=>{
         <Route path="checkout" element={<CheckOut/>} />
         <Route path="userlogin" element={<UserLogin />} />
         <Route path="usersignup" element={<UserRegistration />} />
-        <Route path="contact" element={<Contact/>} />
+        {/* <Route path="contact" element={<Contact/>} /> */}
         <Route path="search" element={<Search/>} />
         </Route>
 
