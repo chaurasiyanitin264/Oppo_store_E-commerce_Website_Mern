@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { useState, useEffect } from 'react';
 import { Dropdown } from 'react-bootstrap'; 
 import { useNavigate } from 'react-router-dom';
-
+import { toast } from "react-toastify";
 const TopMenu = () => {
   const ProductData = useSelector(state => state.mycart.cart);
   const proLength = ProductData.length;
@@ -27,6 +27,8 @@ const TopMenu = () => {
     localStorage.clear("username");
     setIsLoggedOut(false); 
     setShowDropdown(false); 
+    toast.success("logout!", { position: "bottom-right", autoClose: 3000 });
+
     navigate("/home"); 
   };
 
