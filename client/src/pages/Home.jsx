@@ -195,13 +195,13 @@ const Home = () => {
 
       <div style={{ marginTop: "20px", marginLeft: "10px", marginRight: "10px" }}>
         <div>
-          <img src={coro} alt="" />
+          <img src={coro} alt="" style={{marginBottom:"10px"}} />
         </div>
         <div>
-          <img src={coro1} alt="" />
+          <img src={coro1} alt="" style={{marginBottom:"10px"}} />
         </div>
         <div>
-          <img src={coro2} alt="" />
+          <img src={coro2} alt="" style={{marginBottom:"10px"}}/>
         </div>
       {/* <Carousel>
         <Carousel.Item>
