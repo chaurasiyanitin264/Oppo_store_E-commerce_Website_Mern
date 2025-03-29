@@ -63,6 +63,17 @@ const Update = () => {
         return text;
     };
 
+    const RemoveProduct = async (id) => {
+        let api = `${WEB_URL}/admin/removedelete`;
+        try {
+            const response = await axios.post(api, { id: id });
+            alert("Product Deleted Successfully");
+        } catch (error) {
+            console.error("Error deleting product:", error);
+        }
+        loadData();
+    };
+
     return (
         <div className="product-manager-container">
             <div className="header-section">
@@ -147,6 +158,9 @@ const Update = () => {
                                                 Remove Featured
                                             </Button>
                                         )}
+                                    </td>
+                                    <td>
+                                        <Button variant="danger" onClick={()=>{RemoveProduct(product._id)}}>Delete</Button>
                                     </td>
                                 </tr>
                             ))}

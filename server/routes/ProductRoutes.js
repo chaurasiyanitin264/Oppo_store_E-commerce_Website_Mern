@@ -10,5 +10,6 @@ route.get("/audio",ProductController.Audio);
 route.post('/search_Product',ProductController.Search_Product)
 route.get("/tablet",ProductController.Tablet);
 route.get("/mobile",ProductController.Mobile);
+// route.post("/removedelete",ProductController.RemoveDelete);
 
 module.exports=route;

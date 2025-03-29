@@ -8,6 +8,9 @@ import { useDispatch } from "react-redux";
 import { addtoCart } from "../redux/cartSlice";
 
 import Carousel from 'react-bootstrap/Carousel';
+import coro2 from "../images/mob.png";
+import coro1 from "../images/Screenshot 2025-03-28 230751.png";
+import coro from "../images/Screenshot 2025-03-28 230348.png";
 import AutoPlayVideo from './AutoPlayVideo';
 
 import { useContext } from "react";
@@ -18,6 +21,8 @@ import { useContext } from "react";
 import AOS from 'aos'; 
 import 'aos/dist/aos.css'; 
 import { LoginContext } from '../LoginContext';
+import Allcategory from './Allcategory';
+
 
 const Home = () => {
 
@@ -157,26 +162,71 @@ const Home = () => {
 
   return (
     <>
-      
-
-      <Carousel style={{  border: "1px solid blue", marginBottom: "10px", marginTop: "1px" }} data-aos="fade-down">
-        <Carousel.Item >
-          {/* <img src={C}   className="caro" /> */}
-          {/* width="100%" height="450" */}
-          <Carousel.Caption>
-            <h1>OPPO Reno13 Pro 5G</h1>
-            <h4>AL LivePhoto | AL Clarity</h4>
-            <h4>UnderWater Photography with IP 68 & IP 69</h4>
-            <Button style={{ marginRight: "20px", backgroundColor: "white", color: "black" }}>Learn more</Button>
-            <Button variant="primary">Buy Now</Button>
-          </Carousel.Caption>
-        </Carousel.Item>
-        
-      </Carousel>
-
-      <div className='video' style={{ margin: "10px", borderRadius: "1%", backgroundColor: "#E0E8EA" }} data-aos="fade-up">
+         <div className='video' style={{ margin: "-1px", backgroundColor: "#E0E8EA",padding:"10px" }} data-aos="fade-up">
         <AutoPlayVideo />
       </div>
+      <div
+  style={{
+    display: "flex",
+    justifyContent: "center", // Horizontally center
+    alignItems: "center", // Vertically center
+   
+  }}
+>
+  <div
+    style={{
+      fontSize: "24px",
+      fontWeight: "bold",
+      color: "#ff5722",
+      textShadow: "2px 2px 5px rgba(0,0,0,0.3)",
+      letterSpacing: "2px",
+      // padding: "10px 20px",
+      background: "linear-gradient(to right, #ff9966, #ff5e62)",
+      borderRadius: "8px",
+      textAlign: "center",
+      animation: "pulse 1.5s infinite alternate",
+    }}
+  >
+    New Arrivals
+  </div>
+</div>
+
+
+
+      <div style={{ marginTop: "20px", marginLeft: "10px", marginRight: "10px" }}>
+        <div>
+          <img src={coro} alt="" />
+        </div>
+        <div>
+          <img src={coro1} alt="" />
+        </div>
+        <div>
+          <img src={coro2} alt="" />
+        </div>
+      {/* <Carousel>
+        <Carousel.Item>
+          <img className="d-block w-100" src={coro} alt="First Slide" />
+        </Carousel.Item>
+        <Carousel.Item>
+          <img className="d-block w-100" src={coro1} alt="Second Slide" />
+        </Carousel.Item>
+        <Carousel.Item>
+          <img className="d-block w-100" src={coro2} alt="Third Slide" />
+        </Carousel.Item>
+      </Carousel> */}
+    </div>
+
+
+
+    
+  
+
+
+   
+
+      <div>
+      <Allcategory/>
+    </div>
 
       <div>
         <center data-aos="fade-up">

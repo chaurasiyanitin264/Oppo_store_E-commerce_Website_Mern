@@ -30,6 +30,12 @@ const DisplayProduct=async(req,res)=>{
         console.log(error)
     }
 }
+const Remove=async(req,res)=>{
+
+ console.log(req.body);
+ res.send("okk")
+
+}
 const productMakePrimary=async(req, res)=>{
     const {id} = req.body;
     const Data= await ProductModels.findByIdAndUpdate(id, {status:"primary"} );
@@ -98,10 +104,7 @@ const AdminLogin = async (req, res) => {
 
 
 
-const helpsupport=async(req,res)=>{
-    console.log(req.body);
-    res.send("okk")
-}
+
 
 module.exports ={
     productSave,
@@ -112,6 +115,6 @@ module.exports ={
     displayAllCustomer,
     AdminLogin,
     adminauth,
-    helpsupport
+    Remove
   
 }

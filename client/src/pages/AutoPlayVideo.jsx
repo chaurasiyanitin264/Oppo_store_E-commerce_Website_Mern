@@ -3,7 +3,7 @@ import Video from "../images/video.mp4";
 // import "../css/auto.css"
 const AutoPlayVideo = () => {
   return (
-    <div className='video-container' style={{ marginTop: "20px", borderRadius: '5%', overflow: 'hidden' }}>
+    <div className='video-container' >
       <video
         width="100%"  
         height="auto" 
@@ -12,7 +12,7 @@ const AutoPlayVideo = () => {
         muted
         playsInline
         src={Video} 
-        style={{ borderRadius: '1%' }} 
+         
       />
     </div>
   );
