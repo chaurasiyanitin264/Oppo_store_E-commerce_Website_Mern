@@ -18,6 +18,7 @@ import "react-toastify/dist/ReactToastify.css"
 // import Contact from "./pages/Contact";
 import Search from "./pages/Search";
 import Cart from "./pages/CartProduct";
+import PaymentDone from "./pages/paymentDone";
 
 const App=()=>{
  
@@ -38,6 +39,7 @@ const App=()=>{
         <Route path="usersignup" element={<UserRegistration />} />
         {/* <Route path="contact" element={<Contact/>} /> */}
         <Route path="search" element={<Search/>} />
+        <Route path="paymentdone" element={<PaymentDone/>} />
         </Route>
 
 

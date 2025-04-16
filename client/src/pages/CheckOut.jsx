@@ -82,6 +82,7 @@ const CheckOut = () => {
         contact: mydata.contact
       });
       initPay(data.data);
+      navigate("/paymentdone")
     } catch (error) {
       console.log(error);
     }

@@ -5,11 +5,25 @@ import { Card } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { addtoCart } from "../redux/cartSlice";
 import { useNavigate } from "react-router-dom";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import Shopcart from "./shopCart";
 
 const Mobile = () => {
   const [data, setData] = useState([]);
   const dispatch = useDispatch();
-  const navigate=useNavigate();
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+      easing: 'ease-in-out',
+    });
+    
+    window.addEventListener('resize', AOS.refresh);
+    return () => window.removeEventListener('resize', AOS.refresh);
+  }, []);
   
   const loadData = async () => {
     try {
@@ -30,103 +44,237 @@ const Mobile = () => {
     navigate(`/productdetails/${id}`);
   };
 
-  const ans = data.map((key) => {
-    return (
-      <div style={{ marginTop:"90px",display: "flex", justifyContent: "center", margin: "20px" }}>
-      <Card
-        style={{
-          width: "100%",
-          maxWidth: "400px",
-          margin: "20px",
-          boxSizing: "border-box",
-          borderRadius: "10px", 
-          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)", 
-          transition: "transform 0.3s ease, box-shadow 0.3s ease", 
-        }}
-        className="product-card"
-      >
-        <div className="image-container" style={{ position: "relative", backgroundColor: "#E0E8EA", borderRadius: "10px 10px 0 0" }}>
-          <img
-            src={`${WEB_URL}/${key.defaultImage}`}
-            alt={key.name}
-            className="product-image"
-            onClick={() => showFullProduct(key._id)}
-            style={{
-              width: "100%",
-              height: "auto",
-              borderRadius: "10px 10px 0 0", 
-              cursor: "pointer",
-              transition: "transform 0.3s ease",
-            }}
-          />
-        </div>
-        <Card.Body style={{ display: "flex", justifyContent: "space-between", padding: "15px", borderRadius: "0 0 10px 10px" }}>
-          <div>
-            <Card.Text style={{ fontFamily: "Arial, sans-serif", fontSize: "14px", color: "#333", lineHeight: "1.5" }}>
-              {/* {key.description || "No description available."} */}
-              <br />
-              <span style={{ fontWeight: "bold", color: "#000", fontSize: "20px" }}>
-                ₹ {key.price}/-
-              </span>
-            </Card.Text>
-          </div>
-          <button
-            className="add-to-cart"
-            style={{
-              backgroundColor: "#28a745", 
-              color: "#fff",
-              border: "none",
-              padding: "12px 18px", 
-              borderRadius: "5px",
-              cursor: "pointer",
-              fontSize: "14px", 
-              fontWeight: "bold",
-              transition: "background-color 0.3s, transform 0.3s",
-            }}
-            onClick={() => {
-              dispatch(
-                addtoCart({
-                  id: key._id,
-                  name: key.name,
-                  brand: key.brand,
-                  price: key.price,
-                  description: key.description,
-                  category: key.category,
-                  subcategory: key.subcategory,
-                  images: key.images,
-                  defaultImage: key.defaultImage,
-                  ratings: key.ratings,
-                  status: key.status,
-                  qnty: 1,
-                })
-              );
-            }}
-            onMouseEnter={(e) => e.target.style.backgroundColor = "#218838"} 
-            onMouseLeave={(e) => e.target.style.backgroundColor = "#28a745"} 
-          >
-            Buy Now
-          </button>
-        </Card.Body>
-        
-      </Card>
-    </div>
-    
-    );
-  });
-
-  return(
-    <>
-    <center>
-    <div style={{marginTop:"90px"}}>
-      <div style={{fontSize:"24px",fontWeight: "bold",marginBottom:"10px" }}>Latest OPPO Phone</div>
-      Explore the latest mobile from OPPO India.
-    </div>
-    </center>
-     <div className='product-list' data-aos="fade-down">
-        {ans}
+  return (
+    <div className="mobile-container">
+      <div className="section-header" data-aos="fade-up">
+        <h2>Latest OPPO Phones</h2>
+        <div className="title-underline"></div>
+        <p className="section-description">Explore the latest mobile phones from OPPO India</p>
       </div>
-    </>
-  )
+
+      <div className="product-grid" data-aos="fade-up">
+        {data.map((product) => (
+          <div className="product-card-wrapper" key={product._id} data-aos="fade-up">
+            <Card className="product-card">
+              <div className="image-container" onClick={() => showFullProduct(product._id)}>
+                <img
+                  src={`${WEB_URL}/${product.defaultImage}`}
+                  alt={product.name}
+                  className="product-image"
+                />
+                <div className="product-overlay">
+                  <span>View Details</span>
+                </div>
+              </div>
+              <Card.Body>
+                <h3 className="product-name">{product.name}</h3>
+                <p className="product-brand">{product.brand}</p>
+                <div className="card-footer">
+                  <span className="product-price">₹{product.price}/-</span>
+                  <button
+                    className="buy-button"
+                    onClick={() => {
+                      dispatch(
+                        addtoCart({
+                          id: product._id,
+                          name: product.name,
+                          brand: product.brand,
+                          price: product.price,
+                          description: product.description,
+                          category: product.category,
+                          subcategory: product.subcategory,
+                          images: product.images,
+                          defaultImage: product.defaultImage,
+                          ratings: product.ratings,
+                          status: product.status,
+                          qnty: 1,
+                        })
+                      );
+                    }}
+                  >
+                    Buy Now
+                  </button>
+                </div>
+              </Card.Body>
+            </Card>
+          </div>
+        ))}
+      </div>
+
+      {/* cart icon */}
+<Shopcart/>
+
+      {/* Add CSS styles */}
+      <style jsx>{`
+        .mobile-container {
+          font-family: 'Poppins', sans-serif;
+          color: #333;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 20px;
+          margin-top: 80px;
+        }
+
+        .section-header {
+          text-align: center;
+          margin: 30px 0;
+        }
+
+        .section-header h2 {
+          font-size: 32px;
+          font-weight: 700;
+          color: #333;
+          position: relative;
+          display: inline-block;
+          margin-bottom: 10px;
+        }
+
+        .title-underline {
+          height: 4px;
+          width: 80px;
+          background: linear-gradient(to right, #ff9966, #ff5e62);
+          margin: 10px auto 20px;
+          border-radius: 2px;
+        }
+
+        .section-description {
+          font-size: 16px;
+          color: #666;
+          margin-bottom: 30px;
+        }
+
+        .product-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+          gap: 30px;
+          margin-top: 30px;
+        }
+
+        .product-card {
+          border: none;
+          border-radius: 12px;
+          overflow: hidden;
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          height: 100%;
+        }
+
+        .product-card:hover {
+          transform: translateY(-8px);
+          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .image-container {
+          position: relative;
+          background-color: #f8f8f8;
+          overflow: hidden;
+          cursor: pointer;
+          aspect-ratio: 1 / 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .product-image {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image {
+          transform: scale(1.05);
+        }
+
+        .product-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: rgba(0, 0, 0, 0.3);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+        }
+
+        .product-overlay span {
+          color: white;
+          font-weight: 600;
+          padding: 10px 20px;
+          border-radius: 30px;
+          background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .product-card:hover .product-overlay {
+          opacity: 1;
+        }
+
+        .card-body {
+          padding: 20px;
+          text-align: left;
+          display: flex;
+          flex-direction: column;
+          height: calc(100% - 280px);
+        }
+
+        .product-name {
+          font-size: 18px;
+          font-weight: 600;
+          margin-bottom: 5px;
+          color: #333;
+        }
+
+        .product-brand {
+          color: #777;
+          font-size: 14px;
+          margin-bottom: 15px;
+        }
+
+        .card-footer {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-top: auto;
+        }
+
+        .product-price {
+          font-size: 20px;
+          font-weight: 700;
+          color: #333;
+        }
+
+        .buy-button {
+          background: linear-gradient(to right, #4CAF50, #2E7D32);
+          color: white;
+          border: none;
+          padding: 10px 20px;
+          border-radius: 30px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .buy-button:hover {
+          background: linear-gradient(to right, #2E7D32, #1B5E20);
+          transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+          .product-grid {
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+          }
+          
+          .section-header h2 {
+            font-size: 26px;
+          }
+        }
+      `}</style>
+    </div>
+  );
 };
 
 export default Mobile;

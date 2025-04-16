@@ -1,13 +1,10 @@
 import { useSelector, useDispatch } from "react-redux";
-import Table from 'react-bootstrap/Table';
-import Button from 'react-bootstrap/Button';
-import WEB_URL from "../config";
-import { FaPlusCircle, FaMinusCircle, FaTrashAlt, FaShoppingCart } from "react-icons/fa";
-import { PiCurrencyInr } from "react-icons/pi";
-import { FaMoneyCheck } from "react-icons/fa";
-import { qntyIncrease, qntyDecrease, productRemove } from "../redux/cartSlice";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { FaPlus, FaMinus, FaTrash, FaShoppingCart, FaCreditCard, FaStoreAlt } from "react-icons/fa";
+import { PiCurrencyInr } from "react-icons/pi";
+import { qntyIncrease, qntyDecrease, productRemove } from "../redux/cartSlice";
+import WEB_URL from "../config";
 import "../css/cart.css";
 
 const Cart = () => {
@@ -15,8 +12,6 @@ const Cart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isCartEmpty, setIsCartEmpty] = useState(true);
-  
-  let totalAmount = 0;
   
   useEffect(() => {
     setIsCartEmpty(proData.length === 0);
@@ -37,7 +32,6 @@ const Cart = () => {
     } else {
       dispatch(qntyDecrease({id}));
     }
-    
     
     const priceElement = document.getElementById(`total-price-${id}`);
     if (priceElement) {
@@ -60,116 +54,136 @@ const Cart = () => {
     }
   };
 
-  const cartItems = proData.map((item) => {
-    totalAmount += item.price * item.qnty;
-    return (
-      <tr key={item.id} id={`cart-item-${item.id}`} className="cart-item">
-        <td className="product-image">
-          <div className="img-wrapper">
-            <img src={`${WEB_URL}/${item.defaultImage}`} alt={item.name} />
-          </div>
-        </td>
-        <td className="product-name">{item.name}</td>
-        <td className="product-brand">{item.brand}</td>
-        <td className="product-desc">{item.description}</td>
-        <td className="product-price">
-          <div className="price-container">
-            <PiCurrencyInr className="currency-icon" />
-            <span>{item.price.toLocaleString()}</span>
-          </div>
-        </td>
-        <td className="product-quantity">
-          <div className="quantity-controls">
-            <Button 
-              variant="light" 
-              className="quantity-btn decrease" 
-              onClick={() => handleQuantityChange(item.id, 'decrease')}
-              disabled={item.qnty <= 1}
-            >
-              <FaMinusCircle />
-            </Button>
-            <span className="quantity-value">{item.qnty}</span>
-            <Button 
-              variant="light" 
-              className="quantity-btn increase" 
-              onClick={() => handleQuantityChange(item.id, 'increase')}
-            >
-              <FaPlusCircle />
-            </Button>
-          </div>
-        </td>
-        <td className="product-total" id={`total-price-${item.id}`}>
-          <div className="price-container">
-            <PiCurrencyInr className="currency-icon" />
-            <span>{(item.price * item.qnty).toLocaleString()}</span>
-          </div>
-        </td>
-        <td className="product-actions">
-          <Button 
-            variant="danger" 
-            className="remove-btn" 
-            onClick={() => handleRemove(item.id)}
-          >
-            <FaTrashAlt /> Remove
-          </Button>
-        </td>
-      </tr>
-    );
-  });
+  // Calculate total amount
+  const totalAmount = proData.reduce((total, item) => total + item.price * item.qnty, 0);
 
   return (
-    <div className="cart-container" style={{marginTop:"50px"}}>
-      <div className="cart-header">
-        <h2><FaShoppingCart className="cart-icon" /> Shopping Cart</h2>
-        <div className="cart-summary">
-          <div className="total-amount">
-            <span>Total:</span>
-            <div className="amount">
-              <PiCurrencyInr className="currency-icon" />
-              <span>{totalAmount.toLocaleString()}</span>
+    <div className="cart-page">
+      <div className="cart-container">
+        <div className="cart-header">
+          <h2><FaShoppingCart /> My Shopping Bag</h2>
+          <span className="item-count">{proData.length} {proData.length === 1 ? 'item' : 'items'}</span>
+        </div>
+
+        {isCartEmpty ? (
+          <div className="empty-cart">
+            <FaShoppingCart className="empty-icon" />
+            <h3>Your shopping bag is empty</h3>
+            <p>Looks like you haven't added anything to your bag yet.</p>
+            <button className="shop-now-btn" onClick={() => navigate("/home")}>
+              <FaStoreAlt /> Shop Now
+            </button>
+          </div>
+        ) : (
+          <div className="cart-content">
+            <div className="cart-items">
+              {proData.map((item) => (
+                <div key={item.id} id={`cart-item-${item.id}`} className="cart-item">
+                  <div className="item-image">
+                    <img src={`${WEB_URL}/${item.defaultImage}`} alt={item.name} />
+                  </div>
+                  
+                  <div className="item-content">
+                    <div className="item-details">
+                      <h3>{item.name}</h3>
+                      <div className="item-meta">
+                        <span className="brand">{item.brand}</span>
+                        <div className="item-price">
+                          <PiCurrencyInr />
+                          <span>{item.price.toLocaleString()}</span>
+                        </div>
+                      </div>
+                      <p className="item-desc">{item.description}</p>
+                    </div>
+                    
+                    <div className="item-actions">
+                      <div className="quantity-wrapper">
+                        <button 
+                          className="qty-btn minus"
+                          onClick={() => handleQuantityChange(item.id, 'decrease')}
+                          disabled={item.qnty <= 1}
+                        >
+                          <FaMinus />
+                        </button>
+                        <span className="qty-value">{item.qnty}</span>
+                        <button 
+                          className="qty-btn plus"
+                          onClick={() => handleQuantityChange(item.id, 'increase')}
+                        >
+                          <FaPlus />
+                        </button>
+                      </div>
+                      
+                      <div className="price-total" id={`total-price-${item.id}`}>
+                        <PiCurrencyInr />
+                        <span>{(item.price * item.qnty).toLocaleString()}</span>
+                      </div>
+                      
+                      <button 
+                        className="remove-item"
+                        onClick={() => handleRemove(item.id)}
+                      >
+                        <FaTrash />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            <div className="cart-summary-panel">
+              <div className="summary-header">
+                <h3>Order Summary</h3>
+              </div>
+              
+              <div className="summary-content">
+                <div className="summary-row">
+                  <span>Subtotal</span>
+                  <div className="summary-price">
+                    <PiCurrencyInr />
+                    <span>{totalAmount.toLocaleString()}</span>
+                  </div>
+                </div>
+                
+                <div className="summary-row">
+                  <span>Shipping</span>
+                  <div className="shipping-price">
+                    {totalAmount > 1000 ? 'Free' : (
+                      <div className="summary-price">
+                        <PiCurrencyInr />
+                        <span>99</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+                
+                <div className="summary-row total">
+                  <span>Total</span>
+                  <div className="summary-price">
+                    <PiCurrencyInr />
+                    <span>{(totalAmount > 1000 ? totalAmount : totalAmount + 99).toLocaleString()}</span>
+                  </div>
+                </div>
+              </div>
+              
+              <button 
+                className="checkout-button"
+                onClick={() => {navigate("/checkout")}}
+                disabled={isCartEmpty}
+              >
+                <FaCreditCard /> Checkout Now
+              </button>
+              
+              <button 
+                className="continue-shopping"
+                onClick={() => navigate("/home")}
+              >
+                Continue Shopping
+              </button>
             </div>
           </div>
-          <Button 
-            variant="success" 
-            className="checkout-btn" 
-            onClick={() => {navigate("/checkout")}}
-            disabled={isCartEmpty}
-          >
-            <FaMoneyCheck className="checkout-icon" /> Proceed to Checkout
-          </Button>
-        </div>
+        )}
       </div>
-
-      {isCartEmpty ? (
-        <div className="empty-cart">
-          <FaShoppingCart className="empty-cart-icon" />
-          <h3>Your cart is empty</h3>
-          <p>Looks like you haven't added any products to your cart yet.</p>
-          <Button variant="primary" onClick={() => navigate("/home")}>
-            Continue Shopping
-          </Button>
-        </div>
-      ) : (
-        <div className="table-container" >
-          <Table hover className="cart-table">
-            <thead>
-              <tr>
-                <th>Product</th>
-                <th>Name</th>
-                <th>Brand</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Total</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {cartItems}
-            </tbody>
-          </Table>
-        </div>
-      )}
     </div>
   );
 };

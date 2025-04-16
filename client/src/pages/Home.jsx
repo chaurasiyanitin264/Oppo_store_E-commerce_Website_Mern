@@ -1,31 +1,28 @@
-import Button from 'react-bootstrap/Button';
-import Card from "react-bootstrap/Card";
+import { useState, useEffect, useContext } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import { addtoCart } from "../redux/cartSlice";
+import { FaShoppingCart } from 'react-icons/fa';
 import WEB_URL from "../config";
 import axios from 'axios';
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from "react-redux";
-import { addtoCart } from "../redux/cartSlice";
-
-import Carousel from 'react-bootstrap/Carousel';
-import coro2 from "../images/mob.png";
-import coro1 from "../images/Screenshot 2025-03-28 230751.png";
-import coro from "../images/Screenshot 2025-03-28 230348.png";
 import AutoPlayVideo from './AutoPlayVideo';
-
-import { useContext } from "react";
-
-
-
-
-import AOS from 'aos'; 
-import 'aos/dist/aos.css'; 
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import { LoginContext } from '../LoginContext';
 import Allcategory from './Allcategory';
 
+// Import images directly
+import coro2 from "../images/mob.png";
+import coro1 from "../images/Screenshot 2025-03-28 230751.png";
+import coro from "../images/Screenshot 2025-03-28 230348.png";
+import Shopcart from './shopCart';
 
 const Home = () => {
 
+
+  // Custom carousel state
+  const [activeSlide, setActiveSlide] = useState(0);
+  const slides = [coro, coro1, coro2];
 
   useEffect(() => {
     AOS.init({
@@ -34,14 +31,23 @@ const Home = () => {
       easing: 'ease-in-out',
     });
 
-    
     window.addEventListener('resize', AOS.refresh);
     return () => window.removeEventListener('resize', AOS.refresh);
   }, []);
 
+  // Auto advance carousel
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % slides.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [slides.length]);
+
   const [mydata, setMydata] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { setIsLogedIn } = useContext(LoginContext);
 
   const loadData = () => {
     let api = `${WEB_URL}/product/displayproduct`;
@@ -59,7 +65,6 @@ const Home = () => {
     navigate(`/productdetails/${id}`);
   };
 
-  const { setIsLogedIn } = useContext(LoginContext);
   const getProfile = async () => {
     const token = localStorage.getItem("token");
     const response = await axios.get(`${WEB_URL}/user/profile`, {
@@ -77,166 +82,396 @@ const Home = () => {
     }
   }, []);
 
-  const ans = mydata.map((key) => {
-    return (
-      <div data-aos="fade-up" style={{ display: "flex", justifyContent: "center", margin: "20px" }}>
-      <Card
-        style={{
-          width: "100%",
-          maxWidth: "400px",
-          margin: "20px",
-          boxSizing: "border-box",
-          borderRadius: "10px", 
-          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)", 
-          transition: "transform 0.3s ease, box-shadow 0.3s ease", 
-        }}
-        className="product-card"
-      >
-        <div className="image-container" style={{ position: "relative", backgroundColor: "#E0E8EA", borderRadius: "10px 10px 0 0" }}>
-          <img
-            src={`${WEB_URL}/${key.defaultImage}`}
-            alt={key.name}
-            className="product-image"
-            onClick={() => showFullProduct(key._id)}
-            style={{
-              width: "100%",
-              height: "auto",
-              borderRadius: "10px 10px 0 0", 
-              cursor: "pointer",
-              transition: "transform 0.3s ease",
-            }}
-          />
-        </div>
-        <Card.Body style={{ display: "flex", justifyContent: "space-between", padding: "15px", borderRadius: "0 0 10px 10px" }}>
-          <div>
-            <Card.Text style={{ fontFamily: "Arial, sans-serif", fontSize: "14px", color: "#333", lineHeight: "1.5" }}>
-              {/* {key.description || "No description available."} */}
-              <br />
-              <span style={{ fontWeight: "bold", color: "#000", fontSize: "20px" }}>
-                ₹ {key.price}/-
-              </span>
-            </Card.Text>
-          </div>
-          <button
-            className="add-to-cart"
-            style={{
-              backgroundColor: "#28a745", 
-              color: "#fff",
-              border: "none",
-              padding: "12px 18px", 
-              borderRadius: "5px",
-              cursor: "pointer",
-              fontSize: "14px", 
-              fontWeight: "bold",
-              transition: "background-color 0.3s, transform 0.3s",
-            }}
-            onClick={() => {
-              dispatch(
-                addtoCart({
-                  id: key._id,
-                  name: key.name,
-                  brand: key.brand,
-                  price: key.price,
-                  description: key.description,
-                  category: key.category,
-                  subcategory: key.subcategory,
-                  images: key.images,
-                  defaultImage: key.defaultImage,
-                  ratings: key.ratings,
-                  status: key.status,
-                  qnty: 1,
-                })
-              );
-            }}
-            onMouseEnter={(e) => e.target.style.backgroundColor = "#218838"} 
-            onMouseLeave={(e) => e.target.style.backgroundColor = "#28a745"} 
-          >
-            Buy Now
-          </button>
-        </Card.Body>
-      </Card>
-    </div>
-    
-    );
-  });
-
   return (
-    <>
-         <div className='video' style={{ margin: "-1px", backgroundColor: "#E0E8EA",padding:"10px" }} data-aos="fade-up">
+
+
+    <div className="home-container">
+
+      {/* Hero Video Section */}
+      <div className="hero-video" data-aos="fade-up">
         <AutoPlayVideo />
       </div>
-      <div
-  style={{
-    display: "flex",
-    justifyContent: "center", // Horizontally center
-    alignItems: "center", // Vertically center
-   
-  }}
->
-  <div
-    style={{
-      fontSize: "24px",
-      fontWeight: "bold",
-      color: "#ff5722",
-      textShadow: "2px 2px 5px rgba(0,0,0,0.3)",
-      letterSpacing: "2px",
-      // padding: "10px 20px",
-      background: "linear-gradient(to right, #ff9966, #ff5e62)",
-      borderRadius: "8px",
-      textAlign: "center",
-      animation: "pulse 1.5s infinite alternate",
-    }}
-  >
-    New Arrivals
-  </div>
-</div>
+      {/* Cart Icon */}
+      <Shopcart />
 
-
-
-      <div style={{ marginTop: "20px", marginLeft: "10px", marginRight: "10px" }}>
-        <div>
-          <img src={coro} alt="" style={{marginBottom:"10px"}} />
-        </div>
-        <div>
-          <img src={coro1} alt="" style={{marginBottom:"10px"}} />
-        </div>
-        <div>
-          <img src={coro2} alt="" style={{marginBottom:"10px"}}/>
-        </div>
-      {/* <Carousel>
-        <Carousel.Item>
-          <img className="d-block w-100" src={coro} alt="First Slide" />
-        </Carousel.Item>
-        <Carousel.Item>
-          <img className="d-block w-100" src={coro1} alt="Second Slide" />
-        </Carousel.Item>
-        <Carousel.Item>
-          <img className="d-block w-100" src={coro2} alt="Third Slide" />
-        </Carousel.Item>
-      </Carousel> */}
-    </div>
-
-
-
-    
-  
-
-
-   
-
-      <div>
-      <Allcategory/>
-    </div>
-
-      <div>
-        <center data-aos="fade-up">
-          <h3 >New Product</h3>
-        </center>
+      {/* New Arrivals Section */}
+      <div className="section-title" data-aos="fade-up">
+        <h2>New Arrivals</h2>
+        <div className="title-underline"></div>
       </div>
-      <div className='product-list' data-aos="fade-down">
-        {ans}
+
+      {/* Custom Carousel */}
+      <div className="carousel-container" data-aos="fade-up">
+        <div className="carousel">
+          {slides.map((slide, index) => (
+            <div
+              key={index}
+              className={`carousel-slide ${index === activeSlide ? 'active' : ''}`}
+            >
+              <img src={slide} alt={`Banner ${index + 1}`} />
+            </div>
+          ))}
+
+          <div className="carousel-indicators">
+            {slides.map((_, index) => (
+              <button
+                key={index}
+                className={`indicator ${index === activeSlide ? 'active' : ''}`}
+                onClick={() => setActiveSlide(index)}
+              />
+            ))}
+          </div>
+
+          <button
+            className="carousel-control prev"
+            onClick={() => setActiveSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1))}
+          >
+            &lt;
+          </button>
+
+          <button
+            className="carousel-control next"
+            onClick={() => setActiveSlide((prev) => (prev + 1) % slides.length)}
+          >
+            &gt;
+          </button>
+        </div>
       </div>
-    </>
+
+      {/* Categories Section */}
+      <div className="categories-section" data-aos="fade-up">
+        <Allcategory />
+      </div>
+
+      {/* Featured Products Section */}
+      <div className="featured-products" data-aos="fade-up">
+        <h2>Featured Products</h2>
+        <div className="title-underline"></div>
+        <div className="product-grid">
+          {mydata.map((product) => (
+            <div className="product-card-wrapper" key={product._id} data-aos="fade-up">
+              <div className="product-card">
+                <div className="image-container" onClick={() => showFullProduct(product._id)}>
+                  <img
+                    src={`${WEB_URL}/${product.defaultImage}`}
+                    alt={product.name}
+                    className="product-image"
+                  />
+                  <div className="product-overlay">
+                    <span>View Details</span>
+                  </div>
+                </div>
+                <div className="card-body">
+                  <h3 className="product-name">{product.name}</h3>
+                  <p className="product-brand">{product.brand}</p>
+                  <div className="card-footer">
+                    <span className="product-price">₹{product.price}/-</span>
+                    <button
+                      className="buy-button"
+                      onClick={() => {
+                        dispatch(
+                          addtoCart({
+                            id: product._id,
+                            name: product.name,
+                            brand: product.brand,
+                            price: product.price,
+                            description: product.description,
+                            category: product.category,
+                            subcategory: product.subcategory,
+                            images: product.images,
+                            defaultImage: product.defaultImage,
+                            ratings: product.ratings,
+                            status: product.status,
+                            qnty: 1,
+                          })
+                        );
+                      }}
+                    >
+                      Buy Now
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <style jsx>{`
+        /* Global Styles */
+        .home-container {
+          font-family: 'Poppins', sans-serif;
+          color: #333;
+          max-width: 1200px;
+          margin: 0 auto;
+         
+          position: relative;
+        }
+
+ 
+
+.hero-video {
+  margin-left: -20px;
+  margin-right: -20px;
+}
+
+        /* Section Title */
+        .section-title {
+          text-align: center;
+          margin: 50px 0 30px;
+        }
+
+        .section-title h2 {
+          font-size: 32px;
+          font-weight: 700;
+          color: #333;
+          position: relative;
+          display: inline-block;
+          margin: 0;
+        }
+
+        .title-underline {
+          height: 4px;
+          width: 80px;
+          background: linear-gradient(to right, #ff9966, #ff5e62);
+          margin: 10px auto 30px;
+          border-radius: 2px;
+        }
+
+        /* Custom Carousel */
+        .carousel-container {
+          margin: 30px 0;
+          border-radius: 12px;
+          overflow: hidden;
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .carousel {
+          position: relative;
+          width: 100%;
+          height: auto;
+        }
+
+        .carousel-slide {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          opacity: 0;
+          transition: opacity 0.5s ease;
+          z-index: 1;
+        }
+
+        .carousel-slide.active {
+          opacity: 1;
+          z-index: 2;
+          position: relative;
+        }
+
+        .carousel-slide img {
+          width: 100%;
+          height: auto;
+          display: block;
+        }
+
+        .carousel-indicators {
+          position: absolute;
+          bottom: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+          display: flex;
+          gap: 12px;
+          z-index: 3;
+        }
+
+        .indicator {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background-color: rgba(255, 255, 255, 0.6);
+          border: none;
+          cursor: pointer;
+          padding: 0;
+        }
+
+        .indicator.active {
+          background-color: #fff;
+        }
+
+        .carousel-control {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          z-index: 3;
+          background-color: rgba(255, 255, 255, 0.5);
+          border: none;
+          color: #333;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          font-size: 24px;
+          font-weight: bold;
+          opacity: 0.7;
+          transition: opacity 0.3s ease;
+        }
+
+        .carousel-control:hover {
+          opacity: 1;
+        }
+
+        .prev {
+          left: 20px;
+        }
+
+        .next {
+          right: 20px;
+        }
+
+        /* Categories Section */
+        .categories-section {
+          margin: 50px 0;
+        }
+
+        /* Featured Products */
+        .featured-products {
+          margin: 50px 0;
+          text-align: center;
+        }
+
+        .product-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+          gap: 30px;
+          margin-top: 30px;
+        }
+
+        .product-card {
+          border: none;
+          border-radius: 12px;
+          overflow: hidden;
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          background-color: #fff;
+        }
+
+        .product-card:hover {
+          transform: translateY(-8px);
+          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .image-container {
+          position: relative;
+          background-color: #f8f8f8;
+          overflow: hidden;
+          cursor: pointer;
+          aspect-ratio: 1 / 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .product-image {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image {
+          transform: scale(1.05);
+        }
+
+        .product-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: rgba(0, 0, 0, 0.3);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+        }
+
+        .product-overlay span {
+          color: white;
+          font-weight: 600;
+          padding: 10px 20px;
+          border-radius: 30px;
+          background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .product-card:hover .product-overlay {
+          opacity: 1;
+        }
+
+        .card-body {
+          padding: 20px;
+          text-align: left;
+        }
+
+        .product-name {
+          font-size: 18px;
+          font-weight: 600;
+          margin-bottom: 5px;
+          color: #333;
+        }
+
+        .product-brand {
+          color: #777;
+          font-size: 14px;
+          margin-bottom: 15px;
+        }
+
+        .card-footer {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-top: 15px;
+        }
+
+        .product-price {
+          font-size: 20px;
+          font-weight: 700;
+          color: #333;
+        }
+
+        .buy-button {
+          background: linear-gradient(to right, #4CAF50, #2E7D32);
+          color: white;
+          border: none;
+          padding: 10px 20px;
+          border-radius: 30px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .buy-button:hover {
+          background: linear-gradient(to right, #2E7D32, #1B5E20);
+          transform: translateY(-2px);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+          .product-grid {
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+          }
+          
+          .section-title h2 {
+            font-size: 26px;
+          }
+        }
+      `}</style>
+    </div>
   );
 };
 

@@ -6,13 +6,14 @@ const AutoPlayVideo = () => {
     <div className='video-container' >
       <video
         width="100%"  
-        height="auto" 
+        height="100%"
+         
         autoPlay
         loop
         muted
         playsInline
         src={Video} 
-         
+        
       />
     </div>
   );
