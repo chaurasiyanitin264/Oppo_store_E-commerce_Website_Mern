@@ -45,7 +45,7 @@ The frontend will run at http://localhost:8000
 5. Open the Website in Browser
 Open your browser and go to:
 http://localhost:8000 — Frontend (User View)
-http://localhost:5000 — Backend API
+http://localhost:8000 — Backend API
 
 🛡️ Login Credentials
 🔐 Admin Panel
