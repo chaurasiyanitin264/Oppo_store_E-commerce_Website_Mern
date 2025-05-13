@@ -210,10 +210,7 @@ const Home = () => {
 
  
 
-.hero-video {
-  margin-left: -20px;
-  margin-right: -20px;
-}
+
 
         /* Section Title */
         .section-title {

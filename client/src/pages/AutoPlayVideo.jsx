@@ -18,5 +18,4 @@ const AutoPlayVideo = () => {
     </div>
   );
 }
-
 export default AutoPlayVideo;
