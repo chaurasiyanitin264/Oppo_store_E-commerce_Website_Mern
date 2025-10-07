@@ -138,12 +138,12 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Categories Section */}
+    
       <div className="categories-section" data-aos="fade-up">
         <Allcategory />
       </div>
 
-      {/* Featured Products Section */}
+      
       <div className="featured-products" data-aos="fade-up">
         <h2>Featured Products</h2>
         <div className="title-underline"></div>

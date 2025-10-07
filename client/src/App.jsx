@@ -19,6 +19,7 @@ import "react-toastify/dist/ReactToastify.css"
 import Search from "./pages/Search";
 import Cart from "./pages/CartProduct";
 import PaymentDone from "./pages/paymentDone";
+import OrderDetails from "./admin/OrderDetails";
 
 const App=()=>{
  
@@ -48,6 +49,7 @@ const App=()=>{
         <Route path="admin" element={<AdminDashBoard/>} >
         <Route path="insert" element={<Insert/>} />
         <Route path="update" element={<Update/>}/>
+        <Route path="orderdetails" element={<OrderDetails/>} />
         </Route>
        
       </Routes>

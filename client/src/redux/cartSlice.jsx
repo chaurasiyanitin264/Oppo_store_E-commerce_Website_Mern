@@ -13,7 +13,6 @@ const cartSlice= createSlice({
             console.log(proData);
             if (proData.length>=1)
             {
-             
                 toast.error("Product already added!", {
                     position: "bottom-right",
                     autoClose: 3000,
@@ -22,9 +21,7 @@ const cartSlice= createSlice({
             else
             {
             state.cart.push(actions.payload);
-           
             toast.success("Product succesfully added!", { position: "bottom-right", autoClose: 3000 });
-
             }           
         },
 

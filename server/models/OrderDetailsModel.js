@@ -11,6 +11,7 @@ const customerorderSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now }
 });
 
+// ✅ Check if model already exists to prevent overwrite error in dev
 const CustomerOrder = mongoose.models.customerorder || mongoose.model("customerorder", customerorderSchema);
 
 module.exports = CustomerOrder;

@@ -1,7 +1,7 @@
 import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
-import { 
-  FaHome, FaPlus, FaList, FaEdit, FaBars, FaTimes, 
-  FaUser, FaSignOutAlt, FaChartLine, FaCalendarAlt, 
+import {
+  FaHome, FaPlus, FaList, FaEdit, FaBars, FaTimes,
+  FaUser, FaSignOutAlt, FaChartLine, FaCalendarAlt,
   FaFileAlt, FaUsers
 } from "react-icons/fa";
 import { useState, useEffect } from "react";
@@ -12,42 +12,38 @@ const AdminDashBoard = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(window.innerWidth > 768);
-  
 
   useEffect(() => {
     const handleResize = () => {
       setIsMenuOpen(window.innerWidth > 768);
     };
-    
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-  
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-  
- 
+
   const AdminName = localStorage.getItem("adminname");
-  
+
   const logout = () => {
-    
     localStorage.clear();
     navigate("/home");
   };
-  
 
   const isActive = (path) => {
     return location.pathname.includes(path);
   };
-  
-  
+
   const SampleDashboardContent = () => {
-    
-    if (!location.pathname.includes('createuser') && 
-        !location.pathname.includes('insert') && 
-        !location.pathname.includes('usertaskreport') && 
-        !location.pathname.includes('update')) {
+    if (
+      !location.pathname.includes('createuser') &&
+      !location.pathname.includes('insert') &&
+      !location.pathname.includes('usertaskreport') &&
+      !location.pathname.includes('update') &&
+      !location.pathname.includes('orderdetails')
+    ) {
       return (
         <div>
           <div className="row">
@@ -76,7 +72,7 @@ const AdminDashBoard = () => {
               </div>
             </div>
           </div>
-          
+
           <div className="dashboard-card">
             <h4>Welcome to Admin Dashboard</h4>
             <p>This is a sample dashboard to showcase the styling capabilities.</p>
@@ -89,7 +85,7 @@ const AdminDashBoard = () => {
     }
     return null;
   };
-  
+
   return (
     <>
       <div id="admin-dashboard">
@@ -108,7 +104,7 @@ const AdminDashBoard = () => {
             </Button>
           </div>
         </header>
-        
+
         {/* Main Content */}
         <div id="main-content">
           {/* Sidebar */}
@@ -127,11 +123,15 @@ const AdminDashBoard = () => {
                 <Link to="update" className={`nav-link ${isActive('update') ? 'active' : ''}`}>
                   <FaEdit className="icon" /> Update
                 </Link>
+                {/* ✅ New OrderDetails Link */}
+                <Link to="orderdetails" className={`nav-link ${isActive('orderdetails') ? 'active' : ''}`}>
+                  <FaFileAlt className="icon" /> Order Details
+                </Link>
               </div>
             </nav>
           </aside>
-          
-          
+
+          {/* Outlet + Dashboard Content */}
           <div id="content">
             <SampleDashboardContent />
             <Outlet />

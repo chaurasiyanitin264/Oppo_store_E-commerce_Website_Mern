@@ -1,5 +1,5 @@
 const ProductModels=require("../models/productModels")
-const customerOrderModel=require("../models/customerOrderModel");
+const customerOrderModel=require("../models/OrderDetailsModel");
 const AdminModel=require("../models/adminModels");
 const helpModels=require("../models/HelpSupportModels")
 const jwt = require("jsonwebtoken");
